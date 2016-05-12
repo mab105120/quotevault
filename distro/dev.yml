@@ -3,6 +3,6 @@ server:
    
 database:
   driverClass: org.h2.Driver
-  user: admin
+  user: admin_bourjm
   password: admin
-  url: jdbc:h2:~/quotevault
+  url: jdbc:h2:tcp://localhost/~/quotevault

@@ -25,7 +25,7 @@ public class QuoteVaultResource {
 
 	private QuotesVaultDAO dao;
 
-	public QuoteVaultResource(QuotesVaultDAO dao) {
+	QuoteVaultResource(QuotesVaultDAO dao) {
 		this.dao = dao;
 	}
 

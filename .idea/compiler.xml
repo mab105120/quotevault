@@ -27,9 +27,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="quotevault" target="1.5" />
-      <module name="quotevault-api" target="1.5" />
-      <module name="quotevault-app" target="1.5" />
+      <module name="quotevault" target="1.8" />
+      <module name="quotevault-api" target="1.8" />
+      <module name="quotevault-app" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

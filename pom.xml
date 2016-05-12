@@ -13,6 +13,10 @@
 		<module>quotevault-app</module>
 	</modules>
 
+	<properties>
+		<dropwizard.version>0.8.0</dropwizard.version>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -27,8 +31,6 @@
 		</plugins>
 	</build>
 
-
-
 	<dependencies>
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -39,6 +41,21 @@
 			<groupId>io.dropwizard</groupId>
 			<artifactId>dropwizard-hibernate</artifactId>
 			<version>0.8.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-core</artifactId>
+			<version>${dropwizard.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+		<dependency>
+			<groupId>com.yammer.dropwizard</groupId>
+			<artifactId>dropwizard-testing</artifactId>
+			<version>0.6.2</version>
 		</dependency>
 	</dependencies>
 </project>
