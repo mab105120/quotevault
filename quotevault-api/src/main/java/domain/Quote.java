@@ -14,6 +14,8 @@ import javax.persistence.Table;
 @Table(name = "Quotes")
 public class Quote {
 
+	// I made this change from my home computer.
+	
 	@Id
 	@Column(name = "QUOTEID", nullable = false)
 	private int quoteId;
