@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/quotevault.iml" filepath="$PROJECT_DIR$/quotevault.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quotevault-api/quotevault-api.iml" filepath="$PROJECT_DIR$/quotevault-api/quotevault-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quotevault-app/quotevault-app.iml" filepath="$PROJECT_DIR$/quotevault-app/quotevault-app.iml" />
+    </modules>
+  </component>
+</project>
