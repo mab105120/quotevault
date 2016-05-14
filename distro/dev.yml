@@ -1,6 +1,21 @@
 server:
    type: default
-   
+
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      currentLogFilename: c:/users/moe/desktop/quotevault/quotevault.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: c:/users/moe/desktop/quotevault/arch/quotevault-%d.log
+      archivedFileCount: 5
+      timeZone: UTC
+    - type: console
+      threshold: ALL
+      timeZone: UTC
+      target: stdout
+
 database:
   driverClass: org.h2.Driver
   user: admin_bourjm

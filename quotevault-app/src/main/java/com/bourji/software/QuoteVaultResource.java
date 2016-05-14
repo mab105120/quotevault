@@ -2,12 +2,7 @@ package com.bourji.software;
 
 import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import com.bourji.software.app.QuotesVaultDAO;
@@ -46,6 +41,13 @@ public class QuoteVaultResource {
 	@UnitOfWork
 	public void addQuote(Quote quote) {
 		dao.addQuote(quote);
+	}
+
+	@GET
+	@UnitOfWork
+	@Path("/removequote")
+	public void removeQuote(@QueryParam("id") int id) {
+		dao.removeQuote(id);
 	}
 
 }

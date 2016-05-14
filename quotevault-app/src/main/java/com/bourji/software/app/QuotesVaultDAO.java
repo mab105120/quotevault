@@ -1,33 +1,58 @@
 package com.bourji.software.app;
 
-import java.util.List;
-
+import com.bourji.software.utils.HibernateUtil;
+import domain.Quote;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import domain.Quote;
-import io.dropwizard.hibernate.AbstractDAO;
+import java.util.ArrayList;
+import java.util.List;
 
-public class QuotesVaultDAO extends AbstractDAO<Quote> {
+public class QuotesVaultDAO {
 
-    public QuotesVaultDAO(SessionFactory factory) {
-        super(factory);
+    private HibernateUtil hibernate;
+
+    public QuotesVaultDAO(HibernateUtil hibernate) {
+        this.hibernate = hibernate;
     }
 
     public List<Quote> getAllQuotes() {
-        Criteria cr = criteria();
-        return list(cr);
+        Session session = hibernate.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(Quote.class);
+        List result = cr.list();
+        List<Quote> quotes = new ArrayList<>();
+        for (Object o : result) {
+            Quote q = (Quote) o;
+            quotes.add(q);
+        }
+        session.close();
+        return quotes;
+    }
+
+    private Quote getQuoteById(int id) {
+        Session session = hibernate.getSessionFactory().openSession();
+        Quote q = (Quote) session.get(Quote.class, id);
+        session.close();
+        return q;
     }
 
     public List<Quote> getQuotesByAuthor(String author) {
-        Criteria cr = criteria();
+        Session session = hibernate.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(Quote.class);
         cr.add(Restrictions.eq("author", author));
-        return list(cr);
+        return cr.list();
     }
 
     public void addQuote(Quote quote) {
-        persist(quote);
+        Session session = hibernate.getSessionFactory().openSession();
+        session.save(quote);
+        session.close();
+    }
+
+    public void removeQuote(int id) {
+        Session session = hibernate.getSessionFactory().openSession();
+        session.delete(getQuoteById(id));
+        session.close();
     }
 }
