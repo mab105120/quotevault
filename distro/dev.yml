@@ -1,5 +1,7 @@
 server:
-   type: default
+   applicationConnectors:
+       - type: http
+         port: 1738
 
 logging:
   level: INFO

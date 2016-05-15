@@ -1,6 +1,8 @@
 server:
-   type: default
-   
+   applicationConnectors:
+       - type: http
+         port: 1788
+
 database:
   driverClass: org.h2.Driver
   user: admin_bourjm

@@ -24,7 +24,7 @@ public class QuoteVaultResourceTest {
 
     @ClassRule
     public static final DropwizardAppRule<QuoteVaultConfiguration> RULE =
-            new DropwizardAppRule<>(QuoteVaultApplication.class, ResourceHelpers.resourceFilePath("test.yml"));
+            new DropwizardAppRule<>(QuoteVaultApplicationTest.class, ResourceHelpers.resourceFilePath("test.yml"));
 
     @Test
     public void test() {
@@ -40,7 +40,6 @@ public class QuoteVaultResourceTest {
         });
 
         assertEquals(2, quotes.size());
-
 
     }
 }
