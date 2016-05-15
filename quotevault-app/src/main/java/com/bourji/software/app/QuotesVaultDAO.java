@@ -57,9 +57,11 @@ public class QuotesVaultDAO {
         session.close();
     }
 
-    public void removeQuote(int id) {
+    public void removeQuote(Quote q) {
         Session session = hibernate.getSession();
-        session.delete(getQuoteById(id));
+        session.beginTransaction();
+        session.delete(q);
+        session.getTransaction().commit();
         session.close();
     }
 }

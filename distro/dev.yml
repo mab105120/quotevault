@@ -23,3 +23,5 @@ database:
   user: admin_bourjm
   password: admin
   url: jdbc:h2:tcp://localhost/~/quotevault
+
+hibernate-cfg: C:\Users\Moe\git\quotevault\quotevault-app\src\main\resources\hibernate.cfg.xml

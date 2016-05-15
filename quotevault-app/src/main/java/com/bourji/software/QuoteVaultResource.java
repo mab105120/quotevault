@@ -43,11 +43,11 @@ public class QuoteVaultResource {
 		dao.addQuote(quote);
 	}
 
-	@GET
+	@DELETE
 	@UnitOfWork
 	@Path("/removequote")
-	public void removeQuote(@QueryParam("id") int id) {
-		dao.removeQuote(id);
+	public void removeQuote(Quote q) {
+		dao.removeQuote(q);
 	}
 
 }

@@ -19,27 +19,21 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Moe on 5/13/2016.
  */
-@Ignore
-public class QuoteVaultResourceTest {
+public class QuoteVaultResourceGetQuotes {
 
     @ClassRule
     public static final DropwizardAppRule<QuoteVaultConfiguration> RULE =
             new DropwizardAppRule<>(QuoteVaultApplicationTest.class, ResourceHelpers.resourceFilePath("test.yml"));
 
     @Test
-    public void test() {
+    public void getQuotes() {
         Client client = new JerseyClientBuilder().build();
-
         JsonNode jNode = client.target(String.format("http://localhost:%d/quotes/all", RULE.getLocalPort()))
                 .request()
                 .get(JsonNode.class);
-
         final ObjectMapper MAPPER = new ObjectMapper();
-
         List<Quote> quotes = MAPPER.convertValue(jNode, new TypeReference<List<Quote>>() {
         });
-
         assertEquals(2, quotes.size());
-
     }
 }

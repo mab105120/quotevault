@@ -64,6 +64,8 @@ public class Quote {
         if (o == this)
             return true;
         Quote that = (Quote) o;
-        return author.equals(that.author) && body.equals(that.body) && source.equals(that.source);
+        return author.equalsIgnoreCase(that.author)
+                && body.equalsIgnoreCase(that.body)
+                && source.equalsIgnoreCase(that.source);
     }
 }
