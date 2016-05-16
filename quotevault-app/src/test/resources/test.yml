@@ -5,6 +5,8 @@ server:
 
 database:
   driverClass: org.h2.Driver
-  user: admin_bourjm
-  password: admin
-  url: jdbc:h2:tcp://localhost/~/quotevault
+  user: admin_test
+  password: test
+  url: jdbc:h2:mem:test
+  properties:
+     hibernate.hbm2ddl.auto: create

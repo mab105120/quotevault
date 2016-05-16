@@ -24,6 +24,10 @@ public class QuoteVaultResource {
 		this.dao = dao;
 	}
 
+	private QuotesVaultDAO getDao() {
+		return dao;
+	}
+
 	@GET
 	@Path("/all")
 	@UnitOfWork

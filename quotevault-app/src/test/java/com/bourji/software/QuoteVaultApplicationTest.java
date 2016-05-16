@@ -17,9 +17,8 @@ import java.util.List;
 public class QuoteVaultApplicationTest extends QuoteVaultApplication {
 
     @Override
-    protected QuotesVaultDAO getQuotesVaultDAO() {
-        HibernateUtil hibernateUtil = new HibernateUtil(ResourceHelpers.resourceFilePath("hibernate-test.cfg.xml"));
-        QuotesVaultDAO dao = new QuotesVaultDAO(hibernateUtil);
+    protected QuotesVaultDAO getDao() {
+        QuotesVaultDAO dao = new QuotesVaultDAO(super.hibernate.getSessionFactory());
         setupTestEnvironment(dao);
         return dao;
     }
@@ -38,5 +37,4 @@ public class QuoteVaultApplicationTest extends QuoteVaultApplication {
         return new ObjectMapper().readValue(FixtureHelpers.fixture("quotes.json"),
                 new TypeReference<List<Quote>>(){});
     }
-
 }

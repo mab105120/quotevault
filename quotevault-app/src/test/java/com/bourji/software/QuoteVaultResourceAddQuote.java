@@ -7,6 +7,7 @@ import domain.Quote;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.glassfish.jersey.client.JerseyClientBuilder;
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
 import javax.ws.rs.client.Client;
