@@ -7,38 +7,32 @@ import domain.Quote;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.glassfish.jersey.client.JerseyClientBuilder;
-import org.junit.BeforeClass;
 import org.junit.ClassRule;
+import org.junit.Test;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Moe on 5/14/2016.
+ * Created by Moe on 5/13/2016.
  */
-public class QuoteVaultResourceAddQuote {
+public class QVResourceGetQuotes {
 
     @ClassRule
     public static final DropwizardAppRule<QuoteVaultConfiguration> RULE =
             new DropwizardAppRule<>(QuoteVaultApplicationTest.class, ResourceHelpers.resourceFilePath("test.yml"));
 
-    @org.junit.Test
-    public void addQuote() {
-        final String END_POINT = "http://localhost:%d/quotes";
-        Quote quote = new Quote("something new", "someone new", "somewhere new");
+    @Test
+    public void getQuotes() {
         Client client = new JerseyClientBuilder().build();
-        client.target(String.format(END_POINT, RULE.getLocalPort()))
-                .request()
-                .post(Entity.json(quote));
-        JsonNode jNode = client.target(String.format(END_POINT + "/all", RULE.getLocalPort()))
+        JsonNode jNode = client.target(String.format("http://localhost:%d/quotes/all", RULE.getLocalPort()))
                 .request()
                 .get(JsonNode.class);
-        List<Quote> quotes = new ObjectMapper().convertValue(jNode, new TypeReference<List<Quote>>() {
+        final ObjectMapper MAPPER = new ObjectMapper();
+        List<Quote> quotes = MAPPER.convertValue(jNode, new TypeReference<List<Quote>>() {
         });
-        assertTrue(quotes.size() == 3);
-        assertTrue(quotes.contains(quote));
+        assertEquals(2, quotes.size());
     }
 }

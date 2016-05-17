@@ -24,10 +24,6 @@ public class QuoteVaultResource {
 		this.dao = dao;
 	}
 
-	private QuotesVaultDAO getDao() {
-		return dao;
-	}
-
 	@GET
 	@Path("/all")
 	@UnitOfWork
@@ -36,6 +32,7 @@ public class QuoteVaultResource {
 	}
 
 	@GET
+	@Path("/getquote")
 	@UnitOfWork
 	public List<Quote> getQuotesByAuthor(@QueryParam("author") String author) {
 		return dao.getQuotesByAuthor(author);
@@ -50,8 +47,7 @@ public class QuoteVaultResource {
 	@DELETE
 	@UnitOfWork
 	@Path("/removequote")
-	public void removeQuote(Quote q) {
-		dao.removeQuote(q);
+	public void removeQuote(@QueryParam("id") int id) {
+		dao.removeQuote(id);
 	}
-
 }

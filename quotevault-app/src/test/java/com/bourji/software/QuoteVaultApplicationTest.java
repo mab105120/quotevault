@@ -1,12 +1,10 @@
 package com.bourji.software;
 
 import com.bourji.software.app.QuotesVaultDAO;
-import com.bourji.software.utils.HibernateUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import domain.Quote;
 import io.dropwizard.testing.FixtureHelpers;
-import io.dropwizard.testing.ResourceHelpers;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,7 +16,7 @@ public class QuoteVaultApplicationTest extends QuoteVaultApplication {
 
     @Override
     protected QuotesVaultDAO getDao() {
-        QuotesVaultDAO dao = new QuotesVaultDAO(super.hibernate.getSessionFactory());
+        QuotesVaultDAO dao = new QuotesVaultDAO(hibernate.getSessionFactory());
         setupTestEnvironment(dao);
         return dao;
     }

@@ -1,6 +1,5 @@
 package com.bourji.software.app;
 
-import com.bourji.software.utils.HibernateUtil;
 import domain.Quote;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -48,13 +47,19 @@ public class QuotesVaultDAO {
         Session session = sessionFactory.openSession();
         Criteria cr = session.createCriteria(Quote.class);
         cr.add(Restrictions.eq("author", author));
-        return cr.list();
+        List<Quote> quotesByAuthor = new ArrayList<>();
+        for(Object o: cr.list()) {
+            Quote q = (Quote) o;
+            quotesByAuthor.add(q);
+        }
+        return quotesByAuthor;
     }
 
     public void addQuotes(List<Quote> quotes) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         quotes.forEach(session::save);
+        session.getTransaction().commit();
         session.close();
     }
 
@@ -64,10 +69,11 @@ public class QuotesVaultDAO {
         session.close();
     }
 
-    public void removeQuote(Quote q) {
+    public void removeQuote(int id) {
+        Quote tobeRemoved = getQuoteById(id);
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.delete(q);
+        session.delete(tobeRemoved);
         session.getTransaction().commit();
         session.close();
     }

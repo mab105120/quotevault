@@ -13,26 +13,32 @@ import org.junit.Test;
 import javax.ws.rs.client.Client;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Moe on 5/13/2016.
+ * Created by Moe on 5/15/2016.
  */
-public class QuoteVaultResourceGetQuotes {
+public class QVResourceRemoveQuote {
 
     @ClassRule
     public static final DropwizardAppRule<QuoteVaultConfiguration> RULE =
             new DropwizardAppRule<>(QuoteVaultApplicationTest.class, ResourceHelpers.resourceFilePath("test.yml"));
 
     @Test
-    public void getQuotes() {
+    public void removeQuote() {
+        final String END_POINT = "http://localhost:%d/quotes";
         Client client = new JerseyClientBuilder().build();
-        JsonNode jNode = client.target(String.format("http://localhost:%d/quotes/all", RULE.getLocalPort()))
+        client.target(String.format(END_POINT + "/removequote?id=1", RULE.getLocalPort()))
+                .request()
+                .delete();
+        JsonNode jNode = client.target(String.format(END_POINT + "/all", RULE.getLocalPort()))
                 .request()
                 .get(JsonNode.class);
-        final ObjectMapper MAPPER = new ObjectMapper();
-        List<Quote> quotes = MAPPER.convertValue(jNode, new TypeReference<List<Quote>>() {
+        List<Quote> quotes = new ObjectMapper().convertValue(jNode, new TypeReference<List<Quote>>() {
         });
-        assertEquals(2, quotes.size());
+        assertTrue(quotes.size() == 1);
+        assertTrue(quotes.contains(new Quote("something else","someone else","somewhere else")));
+        assertFalse(quotes.contains(new Quote("something","someone","somewhere")));
     }
 }
